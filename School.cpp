@@ -1,13 +1,11 @@
 #include <iostream>
 
-using namespace std;
-
 int d(int h[], int p) {
 
 	int n = p / 2;
 	if (p == 1)
 	{
-		cout << h[0] << endl;
+		std::cout << h[0];
 		return 0;
 	}
 
@@ -27,7 +25,7 @@ int d(int h[], int p) {
 void main()
 {
 	int n;
-	cin >> n;
+	std::cin >> n;
 
 	int *h = new int[n];
 
