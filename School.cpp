@@ -29,11 +29,7 @@ int drive(int houses[], int prev_max) {
 	int i = 0;
 	for (int j = 0; j < prev_max; j++)
 	{
-		if (j % 2 == 0)
-		{
-			cout << houses[j] << " ";
-		}
-		else
+		if (j % 2 )
 		{
 			newArray[i] = houses[j];
 			i++;
