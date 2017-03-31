@@ -1,68 +1,39 @@
-// ConsoleApplication1.cpp : Defines the entry point for the console application.
-//
-
-
 #include <iostream>
 
 using namespace std;
 
-/**
-prev_max: ha kivettuk az elozo körben az utolsot a tombbol,
-akkor a tomb jelenlegi elso elemet ki kell hagynunk, egyebkent
-azzal kell kezdenunk
+int d(int h[], int p) {
 
-inkabb pakoljuk egy uj tombbe
-
-*/
-int drive(int houses[], int prev_max) {
-
-	int newsize = 0;
-	if (prev_max == 1)
+	int n = p / 2;
+	if (p == 1)
 	{
-		cout << houses[0] << endl;
+		cout << h[0] << endl;
 		return 0;
 	}
-	newsize = prev_max / 2;
 
-	int *newArray = new int[newsize];
-
+	int *A = new int[n];
 	int i = 0;
-	for (int j = 0; j < prev_max; j++)
-	{
+	for (int j = 0; j < p; j++)	
 		if (j % 2 )
 		{
-			newArray[i] = houses[j];
+			A[i] = h[j];
 			i++;
 		}
-	}
 
-	drive(newArray, newsize);
-
+	d(A, n);
 }
 
 
-int main()
+void main()
 {
-
-	// Give number of houses
 	int n;
 	cin >> n;
 
-	int *houses = new int[n];
-	int prev_max = n;
+	int *h = new int[n];
 
-	// Create array with the correct values
-	for (int i = 0; i < n; i++)
-	{
-		houses[i] = i+1;
-	}
+	for (int i = 0; i < n; i++)	
+		h[i] = i+1;	
 
-	drive(houses, prev_max);
-
-	//delete houses
-	delete[] houses;
-
-	return 0;
-
+	d(h, n);
 }
 
