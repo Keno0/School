@@ -1,0 +1,97 @@
+#include <iostream>
+
+int d(int h[], int p) {
+
+	int n = p / 2;
+	if (p == 1)
+	{
+		std::cout << h[0];
+		return 0;
+	}
+
+	int *A = new int[n];
+	int i = 0;
+	for (int j = 0; j < p; j++)
+	{
+		if (j % 2)
+		{
+			A[i] = h[j];
+			i++;
+		}
+	}
+
+	d(A, n);
+}
+
+int drive(int houses[], int p_max)
+{
+	int i = 0;
+	int j = 0;
+	int stepsCounter = 0;
+	houses[j] = 0;
+	j++;
+
+	while (i == p_max)
+	{
+		houses[j] = i;
+		i = (i + 1) % 5;
+	}
+}
+
+class CircleBuff
+{
+	int index = 0;
+	int *buffer;
+	int length = 0;
+
+public:
+	CircleBuff(int n)
+	{
+		buffer = new int[n];
+		length = n;
+		for (int i = 0; i < n; i++)
+			buffer[i] = i + 1;
+	}
+
+	int Next()
+	{
+		do
+		{
+			index = (index + 1) % length;
+		} while (buffer[index] != 0);
+	}
+
+	void Set()
+	{
+		buffer[index] = 0;
+	}
+
+	int Get()
+	{
+		return buffer[index];
+	}
+};
+
+void main()
+{
+	int n;
+	std::cin >> n;
+
+	CircleBuff circleBuff(n);
+
+	for (int i = 0; i < n; i++)
+	{
+		if (i % 2 == 0)
+		{
+			std::cout << circleBuff.Get();
+		}
+	}
+
+	/*int *h = new int[n];
+
+	for (int i = 0; i < n; i++)	
+		h[i] = i+1;	
+
+	d(h, n);*/
+}
+

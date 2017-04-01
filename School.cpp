@@ -1,37 +1,62 @@
 #include <iostream>
 
-int d(int h[], int p) {
+class CircleBuff
+{
+	int index = 0;
+	int *buffer;
+	int length = 0;
+	int setNumber = 0;
 
-	int n = p / 2;
-	if (p == 1)
+public:
+	CircleBuff(int n)
 	{
-		std::cout << h[0];
-		return 0;
+		buffer = new int[n];
+		length = n;
+		for (int i = 0; i < n; i++)
+			buffer[i] = i + 1;
 	}
 
-	int *A = new int[n];
-	int i = 0;
-	for (int j = 0; j < p; j++)	
-		if (j % 2 )
+	void Next()
+	{
+		do
 		{
-			A[i] = h[j];
-			i++;
-		}
+			index = (index + 1) % length;
+		} while (buffer[index] == 0 && setNumber < length);
+	}
 
-	d(A, n);
-}
+	void Set()
+	{
+		setNumber++;
+		if (setNumber == length)
+			std::cout<< buffer[index];
+		buffer[index] = 0;
+	}
 
+	int Get()
+	{
+		return buffer[index];
+	}
+};
 
 void main()
 {
 	int n;
 	std::cin >> n;
 
-	int *h = new int[n];
+	CircleBuff circleBuff(n);
 
-	for (int i = 0; i < n; i++)	
-		h[i] = i+1;	
-
-	d(h, n);
+	for (int i = 0; i < 2*n; i++)
+	{
+		if (i % 2 == 0)
+		{
+			//std::cout << circleBuff.Get() <<" ";
+			circleBuff.Set();
+			circleBuff.Next();
+		}
+		else
+		{
+			circleBuff.Next();
+		}
+	}
 }
 
